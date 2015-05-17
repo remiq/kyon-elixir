@@ -1,0 +1,15 @@
+<div class="list">
+  <div class="control">
+
+  </div>
+
+  <%= render "list.html", conn: @conn, items: @items %>
+
+  <%=
+    Placebooru.SharedView
+    |> render "pager.html", conn: @conn
+  %>
+
+  <%= Placebooru.SharedView |> render "comments.html", comments: @comments %>
+
+</div>

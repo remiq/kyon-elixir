@@ -3,7 +3,7 @@
 
   </div>
 
-  <%= render Placebooru.SharedView, "tags.html", tags: @tags %>
+  <%= Placebooru.SharedView |> render "tags.html", conn: @conn, tags: @tags %>
 
   <img src="/items/kyon.pl_<%= @item.id %>.jpg" alt="" />
 
@@ -14,5 +14,5 @@
     Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
   </p>
 
-  <%= render Placebooru.SharedView, "comments.html", comments: @comments %>
+  <%= Placebooru.SharedView |> render "comments.html", comments: @comments %>
 </div>
