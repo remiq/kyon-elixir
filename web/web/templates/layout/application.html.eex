@@ -14,10 +14,12 @@
   <body>
     <div class="container">
       <div class="header">
+        <!--
         <form method="POST" action="/">
           <input type="text" name="q">
           <input type="submit" value="Search">
         </form>
+        -->
         <div>
           <a href="<%= tag_path(@conn, :all, 1) %>">Browse</a>
           <a href="#">Comments</a>

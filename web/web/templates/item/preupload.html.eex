@@ -1,3 +1,7 @@
 <div>
-  preupload.html
+  <form action="?" method="POST" enctype="multipart/form-data">
+
+    <label for="file">File</label>
+    <input id="file" type="file" name="item">
+  </form>
 </div>
