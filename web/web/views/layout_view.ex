@@ -1,3 +1,3 @@
-defmodule Web.LayoutView do
-  use Web.Web, :view
+defmodule Placebooru.LayoutView do
+  use Placebooru.Web, :view
 end

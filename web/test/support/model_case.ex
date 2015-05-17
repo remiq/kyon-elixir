@@ -1,4 +1,4 @@
-defmodule Web.ModelCase do
+defmodule Placebooru.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -14,7 +14,7 @@ defmodule Web.ModelCase do
   using do
     quote do
       # Alias the data repository and import query/model functions
-      alias Web.Repo
+      alias Placebooru.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
     end
@@ -22,7 +22,7 @@ defmodule Web.ModelCase do
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Web.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Placebooru.Repo, [])
     end
 
     :ok

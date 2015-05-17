@@ -1,13 +1,13 @@
-defmodule Web.Endpoint do
-  use Phoenix.Endpoint, otp_app: :web
+defmodule Placebooru.Endpoint do
+  use Phoenix.Endpoint, otp_app: :placebooru
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :web, gzip: false,
-    only: ~w(css images js favicon.ico robots.txt)
+    at: "/", from: :placebooru, gzip: false,
+    only: ~w(css images items js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -28,8 +28,8 @@ defmodule Web.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_web_key",
-    signing_salt: "4dt+cgcg"
+    key: "_placebooru_key",
+    signing_salt: "t8fzeEl7"
 
-  plug :router, Web.Router
+  plug :router, Placebooru.Router
 end

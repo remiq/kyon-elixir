@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :web, Web.Endpoint,
+config :placebooru, Placebooru.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "jbemKJrKJXe5nUOtmMVG6kz+ZfmCQZQKn4/QLncQr3VaEBh401abzzE5BlTba3tB",
+  secret_key_base: "89weHOx4gncibpEaRyB4TSJPAECN1zwExpVDRJK87eFO9inqENdnvXLCjoLdQFeQ",
   debug_errors: false,
-  pubsub: [name: Web.PubSub,
+  pubsub: [name: Placebooru.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

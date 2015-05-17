@@ -1,5 +1,5 @@
-defmodule Web.PageControllerTest do
-  use Web.ConnCase
+defmodule Placebooru.PageControllerTest do
+  use Placebooru.ConnCase
 
   test "GET /" do
     conn = get conn(), "/"

@@ -7,17 +7,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Phoenix!</title>
+    <title>kyon.pl - reborn</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-        </ul>
-        <span class="logo"></span>
+        <form method="POST" action="/">
+          <input type="text" name="q">
+          <input type="submit" value="Search">
+        </form>
+        <div>
+          <a href="/tag/*/1">Browse</a>
+          <a href="#">Comments</a>
+          <a href="#">Recently&nbsp;tagged</a>
+          <a href="#">Your favs</a>
+          <a href="#">Users favorites</a>
+          <a href="#">Logout</a>
+        </div>
       </div>
 
       <p class="alert alert-info"><%= get_flash(@conn, :info) %></p>

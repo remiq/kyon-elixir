@@ -1,8 +1,8 @@
-defmodule Web.Mixfile do
+defmodule Placebooru.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :web,
+    [app: :placebooru,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -16,7 +16,7 @@ defmodule Web.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [mod: {Web, []},
+    [mod: {Placebooru, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
                     :phoenix_ecto, :postgrex]]
   end

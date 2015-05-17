@@ -1,4 +1,4 @@
-defmodule Web.ConnCase do
+defmodule Placebooru.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -21,21 +21,21 @@ defmodule Web.ConnCase do
       use Phoenix.ConnTest
 
       # Alias the data repository and import query/model functions
-      alias Web.Repo
+      alias Placebooru.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
-      import Web.Router.Helpers
+      import Placebooru.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Web.Endpoint
+      @endpoint Placebooru.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Web.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Placebooru.Repo, [])
     end
 
     :ok

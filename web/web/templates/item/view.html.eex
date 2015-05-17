@@ -1,0 +1,18 @@
+<div class="item">
+  <div class="control">
+
+  </div>
+
+  <%= render Placebooru.SharedView, "tags.html", tags: @tags %>
+
+  <img src="/items/kyon.pl_<%= @item.id %>.jpg" alt="" />
+
+  <p>
+    Source: <%= @item.source %>
+  </p>
+  <p>
+    Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
+  </p>
+
+  <%= render Placebooru.SharedView, "comments.html", comments: @comments %>
+</div>

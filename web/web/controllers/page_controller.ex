@@ -1,5 +1,5 @@
-defmodule Web.PageController do
-  use Web.Web, :controller
+defmodule Placebooru.PageController do
+  use Placebooru.Web, :controller
 
   plug :action
 

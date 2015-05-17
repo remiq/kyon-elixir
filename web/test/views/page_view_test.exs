@@ -1,3 +1,3 @@
-defmodule Web.PageViewTest do
-  use Web.ConnCase, async: true
+defmodule Placebooru.PageViewTest do
+  use Placebooru.ConnCase, async: true
 end

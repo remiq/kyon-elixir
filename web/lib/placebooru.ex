@@ -1,4 +1,4 @@
-defmodule Web do
+defmodule Placebooru do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -8,23 +8,23 @@ defmodule Web do
 
     children = [
       # Start the endpoint when the application starts
-      supervisor(Web.Endpoint, []),
+      supervisor(Placebooru.Endpoint, []),
       # Start the Ecto repository
-      worker(Web.Repo, []),
+      worker(Placebooru.Repo, []),
       # Here you could define other workers and supervisors as children
-      # worker(Web.Worker, [arg1, arg2, arg3]),
+      # worker(Placebooru.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Web.Supervisor]
+    opts = [strategy: :one_for_one, name: Placebooru.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Web.Endpoint.config_change(changed, removed)
+    Placebooru.Endpoint.config_change(changed, removed)
     :ok
   end
 end

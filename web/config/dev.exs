@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :web, Web.Endpoint,
+config :placebooru, Placebooru.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -14,7 +14,7 @@ config :web, Web.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]]
 
 # Watch static and templates for browser reloading.
-config :web, Web.Endpoint,
+config :placebooru, Placebooru.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
@@ -27,9 +27,11 @@ config :web, Web.Endpoint,
 config :logger, :console, format: "[$level] $message\n"
 
 # Configure your database
-config :web, Web.Repo,
+config :placebooru, Placebooru.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "web_dev",
+  # TODO: change to data from ENV
+  # hostname: "db",
+  username: "web",
+  password: "devel",
+  database: "web",
   size: 10 # The amount of database connections in the pool

@@ -1,4 +1,4 @@
-# Web
+# Placebooru
 
 To start your new Phoenix application:
 

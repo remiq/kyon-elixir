@@ -1,0 +1,7 @@
+<div class="tags">
+  <%= for tag_item <- @tags do %>
+  <a href="/tag/<%= tag_item.tag.id %>/1/<%= tag_item.tag.name %>">
+    <%= tag_item.tag.name %>
+  </a>
+  <% end %>
+</div>

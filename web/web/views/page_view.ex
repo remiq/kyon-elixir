@@ -1,3 +1,3 @@
-defmodule Web.PageView do
-  use Web.Web, :view
+defmodule Placebooru.PageView do
+  use Placebooru.Web, :view
 end

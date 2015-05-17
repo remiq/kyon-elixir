@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :web, Web.Endpoint,
+config :placebooru, Placebooru.Endpoint,
   http: [port: 4001],
   server: false
 
@@ -10,9 +10,9 @@ config :web, Web.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :web, Web.Repo,
+config :placebooru, Placebooru.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "web_test",
+  database: "placebooru_test",
   size: 1 # Use a single connection for transactional tests

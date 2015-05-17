@@ -1,5 +1,5 @@
-defmodule Web.ErrorView do
-  use Web.Web, :view
+defmodule Placebooru.ErrorView do
+  use Placebooru.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

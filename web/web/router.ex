@@ -1,5 +1,5 @@
-defmodule Web.Router do
-  use Web.Web, :router
+defmodule Placebooru.Router do
+  use Placebooru.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -12,14 +12,29 @@ defmodule Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Web do
-    pipe_through :browser # Use the default browser stack
+  scope "/", Placebooru do
+    pipe_through :browser
 
     get "/", PageController, :index
+    get "/tag/all/:page", TagController, :all
+    get "/tag/:id/:page/:name", TagController, :single
+    get "/item/:id/:tags", ItemController, :view
+    get "/item/upload", ItemController, :preupload
+    post "/item/upload", ItemController, :upload
+
+    ## missing
+    # list of comments
+    # recent tags
+    # favs of user
+    # favs of all users
+
+    # user login/logout/registration -> use trenpixster/addict (remove mails)
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Web do
-  #   pipe_through :api
-  # end
+   scope "/api", Placebooru do
+     pipe_through :api
+     get "/api/find_tags", TagController, :list
+     post "/api/add_post", ItemController, :upload
+   end
+
 end
