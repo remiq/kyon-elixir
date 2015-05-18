@@ -5,6 +5,8 @@ defmodule Placebooru.ItemController do
 
   plug :action
 
+  @static_path "priv/static/items/"
+
   def index(conn, _params) do
     render conn, "index.html"
   end
@@ -26,10 +28,28 @@ defmodule Placebooru.ItemController do
     render conn, "preupload.html"
   end
 
-  def upload(conn, _params) do
+  def upload(conn, %{"item" => item, "source" => source}) do
     """
-    Saves Item and creates thumbnail.
+    Saves uploaded Item.
     """
+    %Plug.Upload{
+      content_type: content_type, # "image/png"
+      filename: original_name,    # "simple_image.png"
+      path: tmp_path              # "/tmp/plug-1431/multipart-989804-534874-2"
+    } = item
+    # TODO: create record in db, get new id
+    File.copy!(tmp_path, @static_path <> "kyon.pl_X.jpg", :infinity)
+    Mogrify.open(tmp_path)
+    |> Mogrify.resize("200x200^")
+    |> Mogrify.save(@static_path <> "thumb_" <> ".jpg")
+    render conn, "preupload.html"
+  end
+
+  def upload(conn, %{"url" => url}) do
+    """
+    Fetches Item from web.
+    """
+    render conn, "preupload.html"
   end
 
 end

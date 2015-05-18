@@ -1,7 +1,18 @@
 <div>
+  Upload item:
   <form action="?" method="POST" enctype="multipart/form-data">
-
-    <label for="file">File</label>
+    <label for="file">File:</label>
     <input id="file" type="file" name="item">
+    <label for="source">Source:</label>
+    <input id="source" type="text" name="source">
+    <input type="submit" value="Upload">
+  </form>
+</div>
+<div>
+  Fetch from URL:
+  <form action="?" method="POST" enctype="multipart/form-data">
+    <label for="url">URL</label>
+    <input id="url" type="text" name="url">
+    <input type="submit" value="Fetch">
   </form>
 </div>
