@@ -23,10 +23,12 @@ defmodule Placebooru.TagController do
     """
     items = Tag.get_item_ids_by_tag_id(id_tag)
       |> Item.find_by_ids(page)
+    comments = Placebooru.TagComment.find_by_tag_id(id_tag)
+    IO.inspect comments
 
     render conn, "single.html",
       items: items,
-      comments: []
+      comments: comments
   end
 
   def list(conn, _params) do

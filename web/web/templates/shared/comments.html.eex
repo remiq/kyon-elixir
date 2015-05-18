@@ -1,3 +1,8 @@
 <div class="comments">
-  // TODO: handle comments
+  <%= for comment <- @comments do %>
+  <div class="comment">
+    <a href="#<%= comment.user.id %>"><%= comment.user.name %></a> - #%= comment.created %#<br>
+    <%= comment.content %>
+  </div>
+  <% end %>
 </div>
