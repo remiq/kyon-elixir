@@ -26,6 +26,11 @@ Import data to database
 
     web=#
 
+Start Phoenix on local machine
+
+	vm$ cd web
+	vm$ env $(cat ../.env | xargs) mix phoenix.server
+
 
 ## TODO
 

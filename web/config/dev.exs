@@ -31,7 +31,7 @@ config :placebooru, Placebooru.Repo,
   adapter: Ecto.Adapters.Postgres,
   # TODO: change to data from ENV
   # hostname: "db",
-  username: "web",
-  password: "devel",
-  database: "web",
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  database: System.get_env("POSTGRES_USER"),
   size: 10 # The amount of database connections in the pool
