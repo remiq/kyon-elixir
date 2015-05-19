@@ -38,31 +38,21 @@ defmodule Placebooru.ItemController do
       path: tmp_path              # "/tmp/plug-1431/multipart-989804-534874-2"
     } = item
     
-    md5 = File.read!(tmp_path)
-    |> :erlang.md5
-    |> Base.encode16(case: :lower)
+    md5 = get_md5(tmp_path)
 
     existing_items = Item.find_by_md5(md5)
-    if Enum.count(existing_items) > 0 do
-      [existing_item] = existing_items
-      item_id = Integer.to_string existing_item.id
-      redirect conn, to: "/item/" <> item_id <> "/_"
+    case Enum.count(existing_items) do
+      count when count > 0 -> 
+        existing_items
+        |> hd
+        |> redirect_to_item(conn)
+      _ -> 
+        item
+        |> insert(md5, source)
+        |> save_original(tmp_path)
+        |> save_thumb(tmp_path)
+        |> redirect_to_item(conn)
     end
-    item = Repo.insert %Item{
-      module: "img",
-      md5: md5,
-      source: source, # TODO: sanitize source
-      user_id: 1      # TODO: correct user handling
-    }
-    item_id = Integer.to_string item.id
-    File.copy!(tmp_path, 
-      @static_path <> "kyon.pl_" <> item_id <> ".jpg",
-      :infinity)
-    Mogrify.open(tmp_path)
-    |> Mogrify.resize("200x200^")
-    |> Mogrify.save(@static_path <> "thumb_" <> item_id <> ".jpg")
-
-    redirect conn, to: "/item/" <> item_id <> "/_"
   end
 
   def upload(conn, %{"url" => url}) do
@@ -70,6 +60,42 @@ defmodule Placebooru.ItemController do
     Fetches Item from web.
     """
     render conn, "preupload.html"
+  end
+
+  defp get_md5(tmp_path) do
+    File.read!(tmp_path)
+    |> :erlang.md5
+    |> Base.encode16(case: :lower)
+  end
+
+  defp redirect_to_item(item, conn) do
+    item_id = Integer.to_string(item.id)
+    redirect(conn, to: "/item/" <> item_id <> "/_")
+  end
+
+  defp insert(item, md5, source) do
+    Repo.insert %Item{
+      module: "img",
+      md5: md5,
+      source: source, # TODO: sanitize source
+      user_id: 1      # TODO: correct user handling
+    }
+  end
+
+  defp save_original(item, tmp_path) do
+    item_id = Integer.to_string item.id
+    File.copy!(tmp_path, 
+      @static_path <> "kyon.pl_" <> item_id <> ".jpg",
+      :infinity)
+    item
+  end
+
+  defp save_thumb(item, tmp_path) do
+    item_id = Integer.to_string item.id
+    Mogrify.open(tmp_path)
+    |> Mogrify.resize("200x200^")
+    |> Mogrify.save(@static_path <> "thumb_" <> item_id <> ".jpg")
+    item
   end
 
 end
