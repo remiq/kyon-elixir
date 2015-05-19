@@ -34,6 +34,12 @@ defmodule Placebooru.Item do
     |> Repo.get id
   end
 
+  def find_by_md5(md5) do
+    Placebooru.Item
+    |> where_md5(md5)
+    |> Repo.all
+  end
+
   def with_user(query) do
     from q in query,
     preload: [:user]
@@ -49,6 +55,11 @@ defmodule Placebooru.Item do
   def where_ids(query, item_ids) do
     from q in query,
       where: q.id in ^item_ids
+  end
+
+  def where_md5(query, md5) do
+    from q in query,
+      where: q.md5 == ^md5
   end
 
   """
