@@ -55,3 +55,9 @@ CREATE TABLE users (
   passwd VARCHAR(200),
   status INT
 );
+
+CREATE VIEW view_comments AS
+SELECT 'item' AS type, item_id AS ref_id, user_id, content, created FROM item_comments 
+UNION ALL 
+SELECT 'tag' as type, tag_id AS ref_id, user_id, content, created FROM tag_comments;
+

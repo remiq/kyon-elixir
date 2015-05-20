@@ -22,11 +22,10 @@ defmodule Placebooru.Router do
     get "/item/upload", ItemController, :preupload
     post "/item/upload", ItemController, :upload
 
-    ## missing
-    # list of comments
-    # recent tags
-    # favs of user
-    # favs of all users
+    get "/activity/comments/:page", ActivityController, :comments
+    get "/activity/tags/:page", ActivityController, :tags
+    get "/activity/favs/:page", ActivityController, :favs_all
+    get "/activity/favs/:user_id/:page", ActivityController, :favs
 
     # user login/logout/registration -> use trenpixster/addict (remove mails)
   end

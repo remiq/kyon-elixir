@@ -21,13 +21,11 @@
         </form>
         -->
         <div>
-          <a href="<%= item_path(@conn, :preupload) %>">Add</a>
           <a href="<%= tag_path(@conn, :all, 1) %>">Browse</a>
-          <a href="#">Comments</a>
-          <a href="#">Recently&nbsp;tagged</a>
-          <a href="#">Your favs</a>
-          <a href="#">Users favorites</a>
-          <a href="#">Logout</a>
+          <a href="<%= activity_path(@conn, :comments, 1) %>">Comments</a>
+          <a href="<%= activity_path(@conn, :tags, 1) %>">Recently&nbsp;tagged</a>
+          <a href="<%= activity_path(@conn, :favs_all, 1) %>">Users favorites</a>
+          <a href="<%= item_path(@conn, :preupload) %>">Add</a>
         </div>
       </div>
 
