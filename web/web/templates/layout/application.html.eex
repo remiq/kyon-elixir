@@ -21,6 +21,7 @@
         </form>
         -->
         <div>
+          <a href="<%= item_path(@conn, :preupload) %>">Add</a>
           <a href="<%= tag_path(@conn, :all, 1) %>">Browse</a>
           <a href="#">Comments</a>
           <a href="#">Recently&nbsp;tagged</a>

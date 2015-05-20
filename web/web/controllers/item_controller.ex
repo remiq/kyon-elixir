@@ -18,7 +18,7 @@ defmodule Placebooru.ItemController do
     render conn, "view.html",
       item: Item.find_by_id(id),
       tags: Tag.for_item(id),
-      comments: []
+      comments: Placebooru.ItemComment.find_by_item_id(id)
   end
 
   def preupload(conn, _params) do
