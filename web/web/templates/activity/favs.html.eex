@@ -7,3 +7,5 @@
   </div>
   <% end %>
 </div>
+<%= Placebooru.SharedView |> render "pager.html",
+  page: @page, url: &(activity_path(@conn, :favs_all, &1)) %>

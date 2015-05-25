@@ -24,6 +24,11 @@ defmodule Placebooru.ActivityController do
     """
     Renders list of items favourited by at least one person.
     """
+    fav_ids = Placebooru.ItemFav.get_fav_item_ids()
+    IO.inspect(fav_ids)
+    render conn, "favs.html",
+      items: Placebooru.Item.find_by_ids(fav_ids, page),
+      page: String.to_integer(page)
   end
 
   def favs(conn, %{"page" => page, "user_id" => user_id}) do

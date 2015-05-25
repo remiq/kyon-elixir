@@ -14,7 +14,9 @@ defmodule Placebooru.TagController do
     Displays all Items without filtering them by tag.
     """
     items = Item.find_all page
-    render conn, "all.html", items: items
+    render conn, "all.html", 
+      items: items, page: String.to_integer(page)
+
   end
 
   def single(conn, %{"id" => id_tag, "page" => page}) do
@@ -28,7 +30,9 @@ defmodule Placebooru.TagController do
 
     render conn, "single.html",
       items: items,
-      comments: comments
+      comments: comments,
+      id_tag: id_tag,
+      page: String.to_integer(page)
   end
 
   def list(conn, _params) do

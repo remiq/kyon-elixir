@@ -7,7 +7,7 @@
 
   <%=
     Placebooru.SharedView
-    |> render "pager.html", conn: @conn
+    |> render "pager.html", page: @page, url: &(tag_path(@conn, :all, &1))
   %>
 
 </div>

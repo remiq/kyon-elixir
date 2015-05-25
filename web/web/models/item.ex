@@ -4,6 +4,7 @@ defmodule Placebooru.Item do
   alias Placebooru.Repo
 
   @page_size 20
+  
 
   schema "items" do
     field :module, :string

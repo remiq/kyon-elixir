@@ -26,3 +26,6 @@ INSERT INTO tag_comments (tag_id, user_id, content, created) VALUES
   (13853, 3);
 
 INSERT INTO users (id, name) VALUES (1, 'testuser');
+
+INSERT INTO item_favs (item_id, user_id) VALUES
+(13853, 1);
