@@ -3,14 +3,13 @@ defmodule Placebooru.ViewComment do
   use Ecto.Model
 
   @page_size 20
-  @primary_key false
 
   schema "view_comments" do
     field :type, :string
     field :ref_id, :integer
     field :content, :string
     field :created, :datetime
-    field :user_id, :integer # no id -> no relations
+    belongs_to :user, Placebooru.User
   end
 
   def find_new(page) do
