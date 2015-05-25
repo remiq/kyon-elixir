@@ -1,0 +1,18 @@
+<div class="tag-items">
+  <%= for tag_item <- @tag_items do %>
+  <div class="tag-item">
+    <div class="item">
+      <a href="<%= item_path(@conn, :view, tag_item.item_id, "_") %>">
+        <img src="/items/thumb_<%= tag_item.item_id %>.jpg">
+      </a>
+    </div>
+    <div class="tag">
+      <a href="<%= tag_path(@conn, :single, tag_item.tag_id, 1, "_") %>">
+        <%= tag_item.tag.name %>
+      </a>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= Placebooru.SharedView |> render "pager.html",
+  page: @page, url: &(activity_path(@conn, :tags, &1)) %>

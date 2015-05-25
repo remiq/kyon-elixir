@@ -3,6 +3,7 @@ defmodule Placebooru.ViewComment do
   use Ecto.Model
 
   @page_size 20
+  @primary_key {:id, :string, []}
 
   schema "view_comments" do
     field :type, :string
@@ -14,8 +15,14 @@ defmodule Placebooru.ViewComment do
 
   def find_new(page) do
     Placebooru.ViewComment
+    |> with_user
     |> with_pagination(page)
     |> Placebooru.Repo.all
+  end
+
+  defp with_user(query) do
+    from q in query,
+      preload: [:user]
   end
 
   def with_pagination(query, page) do

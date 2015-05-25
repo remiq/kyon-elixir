@@ -1,8 +1,5 @@
 <div class="comments">
   <%= for comment <- @comments do %>
-  <div class="comment">
-    <a href="#<%= comment.user.id %>"><%= comment.user.name %></a> - #%= comment.created %#<br>
-    <%= comment.content %>
-  </div>
+  <%= Placebooru.SharedView |> render "comment.html", comment: comment %>
   <% end %>
 </div>

@@ -1,1 +1,10 @@
-pager.html.eex
+<div class="pager">
+  <%= if (@page > 1) do %>
+  <a href="<%= @url.(@page - 1) %>">
+    Prev
+  </a>
+  <% end %>
+  <a href="<%= @url.(@page + 1) %>">
+    Next
+  </a>
+</div>

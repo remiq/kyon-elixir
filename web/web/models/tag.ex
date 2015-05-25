@@ -38,6 +38,8 @@ defmodule Placebooru.Tag do
       preload: [:tag]
   end
 
+  
+
   """
   INSERT INTO tags (id, name) VALUES
   (1, 'aaa'),

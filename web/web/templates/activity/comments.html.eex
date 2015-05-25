@@ -1,1 +1,24 @@
-comments.html.eex
+<div class="view-comments">
+  <%= for comment <- @comments do %>
+    <%= if (comment.type == "item") do %>
+    <div class="item-comment">
+      <div class="item">
+        <a href="<%= item_path(@conn, :view, comment.ref_id, "_") %>">
+          <img src="/items/thumb_<%= comment.ref_id %>.jpg">
+        </a>
+      </div>
+      <%= Placebooru.SharedView |> render "comment.html", comment: comment %>
+    </div>
+    <% end %>
+    <%= if (comment.type == "tag") do %>
+    <div class="tag-comment">
+      <div class="tag">
+        <a href="<%= tag_path(@conn, :single, comment.ref_id, 1, "_") %>">
+          // comment.tag.name
+        </a>
+      </div>
+      <%= Placebooru.SharedView |> render "comment.html", comment: comment, conn: @conn %>
+    </div>
+    <% end %>
+  <% end %>
+</div>

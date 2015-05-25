@@ -15,6 +15,9 @@ defmodule Placebooru.ActivityController do
     """
     Renders list of recently added tags
     """
+    render conn, "tags.html",
+      tag_items: Placebooru.TagItem.find_new(page),
+      page: String.to_integer(page)
   end
 
   def favs_all(conn, %{"page" => page}) do
