@@ -29,7 +29,7 @@ defmodule Placebooru.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_placebooru_key",
-    signing_salt: "t8fzeEl7"
+    signing_salt: System.get_env("SESSION_SIGN_SALT")
 
   plug :router, Placebooru.Router
 end
