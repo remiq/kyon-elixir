@@ -27,7 +27,9 @@ defmodule Placebooru.Router do
     get "/activity/favs/:page", ActivityController, :favs_all
     get "/activity/favs/:user_id/:page", ActivityController, :favs
 
-    # user login/logout/registration -> use trenpixster/addict (remove mails)
+    post "/login", UserController, :login
+    get "/logout", UserController, :logout
+    post "/register", UserController, :register
   end
 
    scope "/api", Placebooru do
