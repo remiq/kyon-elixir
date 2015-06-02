@@ -16,13 +16,13 @@
       <div class="header">
         <% user = @conn.assigns.current_user %>
         <%= if user do %>
-        Logged in as <%= user.name %> (<%= user.id %>).
+        Logged in as <%= user[:name] %> (<%= user[:id] %>).
         <a href="<%= user_path(@conn, :logout) %>">logout</a>
         <%= else %>
         <form method="POST" action="/login">
         <input type="text" name="name" placeholder="name">
         <input type="text" name="passwd" placeholder="password">
-        <input type="submit" value="Login">
+        <input type="submit" value="Login / Register">
         </form>
         <% end %>
         <!--

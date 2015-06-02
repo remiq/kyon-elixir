@@ -35,6 +35,7 @@ defmodule Placebooru.Mixfile do
      {:phoenix_html, "~> 1.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:mogrify, "~> 0.1"},
+     {:comeonin, "~> 1.0"},
      {:cowboy, "~> 1.0"}]
   end
 end

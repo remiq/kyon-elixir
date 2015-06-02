@@ -5,7 +5,9 @@ defmodule Placebooru.PageController do
 
   def index(conn, _params) do
     # TODO: move it to plug
-    conn = assign(conn, :current_user, get_session(conn, :current_user))
+    user = get_session(conn, :current_user)
+    IO.inspect user
+    conn = assign(conn, :current_user, user)
     render conn, "index.html"
   end
 end

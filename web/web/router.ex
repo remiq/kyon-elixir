@@ -29,7 +29,6 @@ defmodule Placebooru.Router do
 
     post "/login", UserController, :login
     get "/logout", UserController, :logout
-    post "/register", UserController, :register
   end
 
    scope "/api", Placebooru do
