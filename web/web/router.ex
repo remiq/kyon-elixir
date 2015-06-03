@@ -5,6 +5,7 @@ defmodule Placebooru.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug Placebooru.Authenticate
     #plug :protect_from_forgery
   end
 
