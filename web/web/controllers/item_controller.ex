@@ -22,6 +22,27 @@ defmodule Placebooru.ItemController do
       comments: Placebooru.ItemComment.find_by_item_id(id)
   end
 
+  def tag(conn, %{"id" => id, "tag" => tag_string}) do
+    """
+    Adds a tag and redirects to view/:id
+    """
+    item_id = String.to_integer(id)
+    [id: user_id, name: _] = LoginInteractor.remind(conn)
+    # TODO: sanitize tag name - alphanumeric + _
+    tag = Repo.get_by Tag, name: tag_string
+    if tag == nil do
+      tag = Repo.insert %Tag{
+        name: tag_string
+      }
+    end
+    tag_id = tag.id
+    Repo.insert %Placebooru.TagItem{
+      item_id: item_id,
+      tag_id: tag_id
+    }
+    redirect(conn, to: "/item/" <> id <> "/_")
+  end
+
   def comment(conn, %{"id" => id, "comment" => comment}) do
     """
     Adds a comment and redirects to view/:id
@@ -29,6 +50,7 @@ defmodule Placebooru.ItemController do
     item_id = String.to_integer(id)
     [id: user_id, name: _] = LoginInteractor.remind(conn)
     Repo.insert %Placebooru.ItemComment{
+      # TODO: sanitize it
       content: comment,
       user_id: user_id,
       item_id: item_id

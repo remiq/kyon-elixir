@@ -12,6 +12,6 @@
       url: &(tag_path(@conn, :single, @id_tag, &1, "_"))
   %>
 
-  <%= Placebooru.SharedView |> render "comments.html", comments: @comments %>
+  <%= Placebooru.SharedView |> render "comments.html", conn: @conn, comments: @comments, url_add: tag_path(@conn, :comment, @id_tag) %>
 
 </div>

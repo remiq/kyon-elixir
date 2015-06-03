@@ -1,4 +1,13 @@
 <div class="tags">
+  <% user = @conn.assigns.current_user %>
+  <%= if user do %>
+  <div class="add">
+  <form method="POST" action="<%= @url_add %>">
+    <input type="text" name="tag">
+    <input type="submit" value="Add">
+  </form>
+  </div>
+  <% end %>
   <%= for tag_item <- @tags do %>
   <a href="<%= tag_path(@conn, :single, tag_item.tag.id, 1, tag_item.tag.name) %>">
     <%= tag_item.tag.name %>

@@ -3,7 +3,7 @@
 
   </div>
 
-  <%= Placebooru.SharedView |> render "tags.html", conn: @conn, tags: @tags %>
+  <%= Placebooru.SharedView |> render "tags.html", conn: @conn, tags: @tags, url_add: item_path(@conn, :tag, @item.id) %>
 
   <img src="/items/kyon.pl_<%= @item.id %>.jpg" alt="" />
 

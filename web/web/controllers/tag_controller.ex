@@ -35,6 +35,21 @@ defmodule Placebooru.TagController do
       page: String.to_integer(page)
   end
 
+  def comment(conn, %{"id" => id, "comment" => comment}) do
+    """
+    Adds a comment and redirects to single/:id
+    """
+    tag_id = String.to_integer(id)
+    [id: user_id, name: _] = Placebooru.LoginInteractor.remind(conn)
+    Repo.insert %Placebooru.TagComment{
+      # TODO: sanitize it
+      content: comment,
+      user_id: user_id,
+      tag_id: tag_id
+    }
+    redirect(conn, to: "/tag/" <> id <> "/1/_")
+  end
+
   def list(conn, _params) do
     """
     Displays JSON of Tag.names matching selected query.

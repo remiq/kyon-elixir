@@ -19,8 +19,10 @@ defmodule Placebooru.Router do
     get "/", PageController, :index
     get "/tag/all/:page", TagController, :all
     get "/tag/:id/:page/:name", TagController, :single
+    post "/tag/:id/comment", TagController, :comment
     get "/item/:id/:tags", ItemController, :view
     post "/item/:id/comment", ItemController, :comment
+    post "/item/:id/tag", ItemController, :tag
     get "/item/upload", ItemController, :preupload
     post "/item/upload", ItemController, :upload
 
