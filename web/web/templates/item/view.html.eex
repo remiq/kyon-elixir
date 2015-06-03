@@ -14,5 +14,5 @@
     Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
   </p>
 
-  <%= Placebooru.SharedView |> render "comments.html", comments: @comments %>
+  <%= Placebooru.SharedView |> render "comments.html", conn: @conn, comments: @comments, url_add: item_path(@conn, :comment, @item.id) %>
 </div>

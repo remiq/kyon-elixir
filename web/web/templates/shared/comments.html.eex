@@ -1,4 +1,13 @@
 <div class="comments">
+  <% user = @conn.assigns.current_user %>
+  <%= if user do %>
+  <div class="add">
+  <form method="POST" action="<%= @url_add %>">
+    <textarea name="comment"></textarea>
+    <input type="submit" value="Comment">
+  </form>
+  </div>
+  <% end %>
   <%= for comment <- @comments do %>
   <%= Placebooru.SharedView |> render "comment.html", comment: comment %>
   <% end %>

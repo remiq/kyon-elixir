@@ -2,6 +2,7 @@ defmodule Placebooru.ItemController do
   use Placebooru.Web, :controller
   alias Placebooru.Item
   alias Placebooru.Tag
+  alias Placebooru.LoginInteractor
 
   plug :action
 
@@ -19,6 +20,20 @@ defmodule Placebooru.ItemController do
       item: Item.find_by_id(id),
       tags: Tag.for_item(id),
       comments: Placebooru.ItemComment.find_by_item_id(id)
+  end
+
+  def comment(conn, %{"id" => id, "comment" => comment}) do
+    """
+    Adds a comment and redirects to view/:id
+    """
+    item_id = String.to_integer(id)
+    [id: user_id, name: _] = LoginInteractor.remind(conn)
+    Repo.insert %Placebooru.ItemComment{
+      content: comment,
+      user_id: user_id,
+      item_id: item_id
+    }
+    redirect(conn, to: "/item/" <> id <> "/_")
   end
 
   def preupload(conn, _params) do

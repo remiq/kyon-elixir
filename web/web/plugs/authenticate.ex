@@ -1,14 +1,14 @@
 defmodule Placebooru.Authenticate do
   import Plug.Conn
+  alias Placebooru.LoginInteractor
 
   def init(opts) do
     opts
   end
 
   def call(conn, _opts) do
-    user = get_session(conn, :current_user)
     conn
-    |> assign(:current_user, user)
+    |> assign(:current_user, LoginInteractor.remind(conn))
   end
 
 end

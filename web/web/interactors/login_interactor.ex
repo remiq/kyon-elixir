@@ -1,6 +1,6 @@
 defmodule Placebooru.LoginInteractor do
   import Phoenix.Controller, only: [put_flash: 3]
-  import Plug.Conn, only: [put_session: 3]
+  import Plug.Conn
   alias Placebooru.Repo
   alias Placebooru.User
 
@@ -44,5 +44,9 @@ defmodule Placebooru.LoginInteractor do
   def remember(user, conn) do
     conn |> put_session(:current_user, 
       id: user.id, name: user.name)
+  end
+
+  def remind(conn) do
+    conn |> get_session(:current_user)
   end
 end
