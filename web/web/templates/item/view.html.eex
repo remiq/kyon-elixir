@@ -7,9 +7,12 @@
 
   <img src="/items/kyon.pl_<%= @item.id %>.jpg" alt="" />
 
+  <%= if String.length(@item.source) > 1 do %>
   <p>
     Source: <%= @item.source %>
   </p>
+  <% end %>
+
   <p>
     Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
   </p>

@@ -18,12 +18,14 @@ defmodule Placebooru.Item do
 
   def find_all(page) do
     Placebooru.Item
+    |> latest
     |> with_pagination(page)
     |> Repo.all
   end
 
   def find_by_ids(item_ids, page) do
     Placebooru.Item
+    |> latest
     |> where_ids(item_ids)
     |> with_pagination(page)
     |> Repo.all
@@ -61,6 +63,11 @@ defmodule Placebooru.Item do
   def where_md5(query, md5) do
     from q in query,
       where: q.md5 == ^md5
+  end
+
+  def latest(query) do
+    from q in query,
+      order_by: [desc: q.id]
   end
 
   """

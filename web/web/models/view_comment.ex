@@ -9,7 +9,7 @@ defmodule Placebooru.ViewComment do
     field :type, :string
     field :ref_id, :integer
     field :content, :string
-    field :created, :datetime
+    field :created, Ecto.DateTime
     belongs_to :user, Placebooru.User
   end
 

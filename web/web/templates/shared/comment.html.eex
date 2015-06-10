@@ -1,4 +1,4 @@
   <div class="comment">
-    <a href="#<%= @comment.user.id %>"><%= @comment.user.name %></a> - #%= @comment.created %#<br>
+    <a href="#<%= @comment.user.id %>"><%= @comment.user.name %></a> - <%= @comment.created %><br>
     <%= @comment.content %>
   </div>

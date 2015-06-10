@@ -5,7 +5,7 @@ defmodule Placebooru.TagComment do
 
   schema "tag_comments" do
     field :content, :string
-    field :created, :datetime
+    field :created, Ecto.DateTime
     belongs_to :tag, Placebooru.Tag
     belongs_to :user, Placebooru.User
   end

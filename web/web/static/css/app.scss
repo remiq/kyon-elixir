@@ -4,7 +4,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-/*! normalize.css v3.0.0 | MIT License | git.io/normalize */html {
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+html {
   font-family:sans-serif;
   -ms-text-size-adjust:100%;
   -webkit-text-size-adjust:100%
@@ -13,3 +14,84 @@ body {
   margin:0
 }
 
+@mixin boxy-link {
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+a, a:visited {
+  color: black;
+  
+}
+
+.header {
+  padding: 5px;
+
+  .login {
+
+  }
+
+  .menu {
+    margin-top: 5px;
+    padding: 5px;
+    a, a:visited {
+      @include boxy-link;
+    }
+  }
+}
+
+.list {
+  .item {
+    max-width: 200px;
+    display: inline;
+  }
+}
+
+.pager {
+  margin: 15px;
+  clear: both;
+  a, a:visited {
+    @include boxy-link;
+  }
+}
+
+.tags {
+  padding: 5px;
+  margin-bottom: 5px;
+  .add {
+    margin-top: 15px;
+  }
+  a, a:visited {
+    @include boxy-link;
+  }
+}
+
+.item-comment, .tag-comment, .tag-item {
+  clear: both;
+  .item, .tag {
+    min-width: 200px;
+    float: left;
+  }
+  .tag {
+    a, a:visited {
+      @include boxy-link;
+    }
+  }
+  .comment {
+    float: left;
+  }
+}
+
+.comments {
+  .add {
+    textarea {
+      display: block;
+      width: 90%;
+    }
+  }
+  .comment {
+    padding: 5px;
+  }
+}

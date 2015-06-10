@@ -53,7 +53,8 @@ defmodule Placebooru.ItemController do
       # TODO: sanitize it
       content: comment,
       user_id: user_id,
-      item_id: item_id
+      item_id: item_id,
+      created: Ecto.DateTime.local()
     }
     redirect(conn, to: "/item/" <> id <> "/_")
   end

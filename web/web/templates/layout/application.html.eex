@@ -19,7 +19,7 @@
         Logged in as <%= user[:name] %> (<%= user[:id] %>).
         <a href="<%= user_path(@conn, :logout) %>">logout</a>
         <%= else %>
-        <form method="POST" action="/login">
+        <form class="login" method="POST" action="/login">
         <input type="text" name="name" placeholder="name">
         <input type="text" name="passwd" placeholder="password">
         <input type="submit" value="Login / Register">
@@ -31,7 +31,7 @@
           <input type="submit" value="Search">
         </form>
         -->
-        <div>
+        <div class="menu">
           <a href="<%= tag_path(@conn, :all, 1) %>">Browse</a>
           <a href="<%= activity_path(@conn, :comments, 1) %>">Comments</a>
           <a href="<%= activity_path(@conn, :tags, 1) %>">Recently&nbsp;tagged</a>

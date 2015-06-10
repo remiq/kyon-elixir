@@ -4,7 +4,7 @@ defmodule Placebooru.ItemComment do
 
 	schema "item_comments" do
 		field :content, :string
-		field :created, :datetime
+		field :created, Ecto.DateTime
 		belongs_to :item, Placebooru.Item
 		belongs_to :user, Placebooru.User
 	end

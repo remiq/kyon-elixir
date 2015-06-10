@@ -11,6 +11,7 @@ defmodule Placebooru.TagItem do
 
   def find_new(page) do
     Placebooru.TagItem
+    |> latest
     |> with_tag
     |> with_pagination(page)
     |> Placebooru.Repo.all
@@ -27,6 +28,11 @@ defmodule Placebooru.TagItem do
   def with_tag(query) do
     from q in query,
       preload: [:tag]
+  end
+
+  def latest(query) do
+    from q in query,
+    order_by: [desc: q.id]
   end
 
   """
