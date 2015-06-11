@@ -13,6 +13,16 @@
 
   <body>
     <div class="container">
+      <% alert_info = get_flash(@conn, :info) %>
+      <%= if (alert_info) do %>
+      <p class="alert alert-info"><%= alert_info %></p>
+      <% end %>
+
+      <% alert_danger = get_flash(@conn, :error) %>
+      <%= if (alert_danger) do %>
+      <p class="alert alert-danger"><%= alert_danger %></p>
+      <% end %>
+
       <div class="header">
         <% user = @conn.assigns.current_user %>
         <%= if user do %>
@@ -21,7 +31,7 @@
         <%= else %>
         <form class="login" method="POST" action="/login">
         <input type="text" name="name" placeholder="name">
-        <input type="text" name="passwd" placeholder="password">
+        <input type="password" name="passwd" placeholder="password">
         <input type="submit" value="Login / Register">
         </form>
         <% end %>
@@ -36,12 +46,12 @@
           <a href="<%= activity_path(@conn, :comments, 1) %>">Comments</a>
           <a href="<%= activity_path(@conn, :tags, 1) %>">Recently&nbsp;tagged</a>
           <a href="<%= activity_path(@conn, :favs_all, 1) %>">Users favorites</a>
+          <%= if user do %>
+          <a href="<%= activity_path(@conn, :favs, user[:id], 1) %>"><%= user[:name] %></a>
           <a href="<%= item_path(@conn, :preupload) %>">Add</a>
+          <% end %>
         </div>
       </div>
-
-      <p class="alert alert-info"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger"><%= get_flash(@conn, :error) %></p>
 
       <%= @inner %>
 

@@ -21,6 +21,8 @@ Start docker containers
 Import data to database
 
     vm$ docker-compose run --rm db bash
+    db$ echo $POSTGRES_PASSWORD
+    devel
     db$ psql --host=db --username=web --password web
     Password for user web: devel
 
@@ -31,10 +33,10 @@ Start Phoenix on local machine
 	vm$ cd web
 	vm$ env $(cat ../.env | xargs) mix phoenix.server
 
+Compilation for production
 
-## TODO
-
-https://github.com/route/mogrify ImageMagick for Elixir
+  vm$ cd web
+  vm$ env $(cat ../.env | xargs) mix phoenix.digest
 
 
 ### Delayed
