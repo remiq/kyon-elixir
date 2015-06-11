@@ -76,6 +76,24 @@ defmodule Placebooru.ItemController do
       path: tmp_path              # "/tmp/plug-1431/multipart-989804-534874-2"
     } = item
     
+    handle_file_upload(conn, tmp_path, source)
+  end
+
+  def upload(conn, %{"url" => url}) do
+    """
+    Fetches Item from web.
+    """
+    HTTPoison.start
+    %HTTPoison.Response{body: file_contents} = HTTPoison.get! url
+    
+    # write to file, since we already have this route
+    tmp_path = "/tmp/kyon-upload-" # TODO: add random ending
+    File.write! tmp_path, file_contents
+
+    handle_file_upload(conn, tmp_path, url)
+  end
+
+  defp handle_file_upload(conn, tmp_path, source) do
     md5 = get_md5(tmp_path)
 
     existing_items = Item.find_by_md5(md5)
@@ -85,19 +103,11 @@ defmodule Placebooru.ItemController do
         |> hd
         |> redirect_to_item(conn)
       _ -> 
-        item
-        |> insert(md5, source)
+        insert(md5, source)
         |> save_original(tmp_path)
         |> save_thumb(tmp_path)
         |> redirect_to_item(conn)
     end
-  end
-
-  def upload(conn, %{"url" => url}) do
-    """
-    Fetches Item from web.
-    """
-    render conn, "preupload.html"
   end
 
   defp get_md5(tmp_path) do
@@ -111,7 +121,7 @@ defmodule Placebooru.ItemController do
     redirect(conn, to: "/item/" <> item_id <> "/_")
   end
 
-  defp insert(item, md5, source) do
+  defp insert(md5, source) do
     Repo.insert %Item{
       module: "img",
       md5: md5,

@@ -8,9 +8,7 @@ defmodule Placebooru.Authenticate do
   end
 
   def call(conn, opts) do
-    IO.inspect opts
     user = LoginInteractor.remind(conn)
-    IO.inspect user
     if !user && opts != :anybody do
       conn 
       |> put_flash(:error, "This function is only for Members!")

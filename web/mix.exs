@@ -18,7 +18,7 @@ defmodule Placebooru.Mixfile do
   def application do
     [mod: {Placebooru, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpoison]]
   end
 
   # Specifies which paths to compile per environment
@@ -36,6 +36,7 @@ defmodule Placebooru.Mixfile do
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:mogrify, "~> 0.1"},
      {:comeonin, "~> 1.0"},
+     {:httpoison, "~> 0.7"},
      {:cowboy, "~> 1.0"}]
   end
 end
