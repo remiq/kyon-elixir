@@ -5,9 +5,9 @@
 
   <%= Placebooru.SharedView |> render "tags.html", conn: @conn, tags: @tags, url_add: item_path(@conn, :tag, @item.id) %>
 
-  <img src="/items/kyon.pl_<%= @item.id %>.jpg" alt="" />
+  <img src="/img/kyon.pl_<%= @item.id %>.jpg" alt="" />
 
-  <%= if String.length(@item.source) > 1 do %>
+  <%= if @item.source && String.length(@item.source) > 1 do %>
   <p>
     Source: <%= @item.source %>
   </p>

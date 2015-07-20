@@ -22,6 +22,14 @@ defmodule Placebooru.ItemController do
       comments: Placebooru.ItemComment.find_by_item_id(id)
   end
 
+  def tag(conn, _) do
+    """
+    TODO: Tagging temporarily disabled.
+    """
+    redirect(conn, to: "/")
+  end
+
+
   def tag(conn, %{"id" => id, "tag" => tag_string}) do
     """
     Adds a tag and redirects to view/:id
@@ -64,6 +72,13 @@ defmodule Placebooru.ItemController do
     Renders page with image upload widget.
     """
     render conn, "preupload.html"
+  end
+
+  def upload(conn, _) do
+    """
+    TODO: Upload temporarily disabled.
+    """
+    redirect(conn, to: "/")
   end
 
   def upload(conn, %{"item" => item, "source" => source}) do
