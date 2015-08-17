@@ -12,13 +12,19 @@ Sub-goals:
 
 
 
+
+
 ## Usage
 
-Get deps using runtime container
+### Setup
 
-    $ docker-compose run --rm web bash
-    web$ mix deps.get
+Copy `.env_example` file as `.env`
 
+    $ cp .env_example .env
+
+Change passwords, salts, etc. Save them somewhere.
+
+    $ vim .env
 
 Start docker containers
 
@@ -26,32 +32,23 @@ Start docker containers
 
 Import data to database
 
-    vm$ docker-compose run --rm db bash
-    db$ echo $POSTGRES_PASSWORD
-    devel
-    db$ psql --host=db --username=web --password web
-    Password for user web: devel
+    vm$ docker-compose run --rm db psql --host=db --username=web web
+    web=# \i ./0.initial.sql
+    web=# \i ./10000.example.sql
 
-    web=#
+### Normal usage
 
-Start Phoenix on local machine
+Change `MIX_PROD` to `prod` in `.env`
 
-	vm$ cd web
-	vm$ env $(cat ../.env | xargs) mix phoenix.server
+    $ vim .env
+    MIX_PROD=prod
 
-Compilation for production
-
-  vm$ cd web
-  vm$ env $(cat ../.env | xargs) mix phoenix.digest
-
-
-### Delayed
+## Delayed
 
 Plugin / api (it probably does not work anymore)
 
-### TO not to DO
+## TO not to DO
 
-No swf.*
 Basic www (all items on same list)
 No advanced tag searching
 

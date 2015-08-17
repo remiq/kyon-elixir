@@ -25,10 +25,11 @@ web:
 db:
   image: postgres:9.4
   env_file: .env
-  ports:
-    - "5432:5432"
+  working_dir: "/db"
+  expose:
+    - "5432"
   volumes:
-    # TODO: add entry for import/export dir
+    - "./db:/db"
     - "./data/db:/var/lib/postgresql/data"
 
 
