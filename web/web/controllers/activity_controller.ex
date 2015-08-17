@@ -1,8 +1,6 @@
 defmodule Placebooru.ActivityController do
   use Placebooru.Web, :controller
 
-  plug :action
-
   def comments(conn, %{"page" => page}) do
     """
     Renders list of recent comments.
@@ -31,7 +29,7 @@ defmodule Placebooru.ActivityController do
       page: String.to_integer(page)
   end
 
-  def favs(conn, %{"page" => page, "user_id" => user_id}) do
+  def favs(_conn, %{"page" => _page, "user_id" => _user_id}) do
     """
     Renders list of items favourited by selected user.
     """

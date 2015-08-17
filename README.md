@@ -14,6 +14,12 @@ Sub-goals:
 
 ## Usage
 
+Get deps using runtime container
+
+    $ docker-compose run --rm web bash
+    web$ mix deps.get
+
+
 Start docker containers
 
     $ docker-compose up -d

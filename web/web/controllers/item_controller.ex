@@ -4,8 +4,6 @@ defmodule Placebooru.ItemController do
   alias Placebooru.Tag
   alias Placebooru.LoginInteractor
 
-  plug :action
-
   @static_path "priv/static/items/"
 
   def index(conn, _params) do
@@ -35,7 +33,7 @@ defmodule Placebooru.ItemController do
     Adds a tag and redirects to view/:id
     """
     item_id = String.to_integer(id)
-    [id: user_id, name: _] = LoginInteractor.remind(conn)
+    [id: _user_id, name: _] = LoginInteractor.remind(conn)
     # TODO: sanitize tag name - alphanumeric + _
     tag = Repo.get_by Tag, name: tag_string
     if tag == nil do
@@ -47,6 +45,7 @@ defmodule Placebooru.ItemController do
     Repo.insert %Placebooru.TagItem{
       item_id: item_id,
       tag_id: tag_id
+      # TODO: tag marking should be auditable
     }
     redirect(conn, to: "/item/" <> id <> "/_")
   end
@@ -86,8 +85,8 @@ defmodule Placebooru.ItemController do
     Saves uploaded Item.
     """
     %Plug.Upload{
-      content_type: content_type, # "image/png"
-      filename: original_name,    # "simple_image.png"
+      content_type: _content_type, # "image/png"
+      filename: _original_name,    # "simple_image.png"
       path: tmp_path              # "/tmp/plug-1431/multipart-989804-534874-2"
     } = item
     

@@ -1,5 +1,26 @@
 
-# TODO: add elixir container
+nginx:
+  image: nginx:1.9.2
+  ports:
+    - "80:80"
+  volumes:
+    - "./data/files:/files"
+    - "./config/nginx:/etc/nginx/conf.d"
+  links:
+    - "web"
+
+web:
+  image: trenpixster/elixir:1.0.5
+  command: "mix do deps.get, compile, phoenix.server"
+  working_dir: "/web"
+  env_file: .env
+  ports:
+    - "4000:4000"
+  volumes:
+    - "./web:/web"
+    - "./data/files:/files"
+  links:
+    - "db"
 
 db:
   image: postgres:9.4
@@ -7,5 +28,7 @@ db:
   ports:
     - "5432:5432"
   volumes:
-    # ugly hack to avoid symlinks on windows partition
-    - /tmp/db/data:/var/lib/postgresql/data
+    # TODO: add entry for import/export dir
+    - "./data/db:/var/lib/postgresql/data"
+
+

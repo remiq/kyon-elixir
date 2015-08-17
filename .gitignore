@@ -1,0 +1,4 @@
+.env
+web/priv/static/items/
+web/mix.lock
+

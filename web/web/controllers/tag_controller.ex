@@ -3,8 +3,6 @@ defmodule Placebooru.TagController do
   alias Placebooru.Item
   alias Placebooru.Tag
 
-  plug :action
-
   def index(conn, _params) do
     render conn, "index.html"
   end
@@ -50,7 +48,7 @@ defmodule Placebooru.TagController do
     redirect(conn, to: "/tag/" <> id <> "/1/_")
   end
 
-  def list(conn, _params) do
+  def list(_conn, _params) do
     """
     Displays JSON of Tag.names matching selected query.
     [API]

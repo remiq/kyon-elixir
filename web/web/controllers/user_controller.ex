@@ -2,8 +2,6 @@ defmodule Placebooru.UserController do
   use Placebooru.Web, :controller
   alias Placebooru.LoginInteractor
 
-  plug :action
-
   def login(conn, post) do
     post
     |> Placebooru.User.validate

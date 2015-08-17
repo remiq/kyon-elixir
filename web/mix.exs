@@ -29,14 +29,14 @@ defmodule Placebooru.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.13"},
-     {:phoenix_ecto, "~> 0.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 1.0"},
-     {:phoenix_live_reload, "~> 0.4", only: :dev},
+    [{:phoenix, "~> 0.16.1"},
+     {:phoenix_ecto, "~> 1.1.0"},
+     {:postgrex, "~> 0.9.1"},
+     {:phoenix_html, "~> 2.1.1"},
+     {:phoenix_live_reload, "~> 0.6.0", only: :dev},
      {:mogrify, "~> 0.1"},
-     {:comeonin, "~> 1.0"},
-     {:httpoison, "~> 0.7"},
-     {:cowboy, "~> 1.0"}]
+     {:comeonin, "~> 1.1.2"},
+     {:httpoison, "~> 0.7.2"},
+     {:cowboy, "~> 1.0.2"}]
   end
 end

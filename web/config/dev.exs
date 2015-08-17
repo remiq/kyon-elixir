@@ -29,9 +29,8 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :placebooru, Placebooru.Repo,
   adapter: Ecto.Adapters.Postgres,
-  # TODO: change to data from ENV
-  # hostname: "db",
+  hostname: System.get_env("POSTGRES_HOST"),
   username: System.get_env("POSTGRES_USER"),
   password: System.get_env("POSTGRES_PASSWORD"),
   database: System.get_env("POSTGRES_USER"),
-  size: 10 # The amount of database connections in the pool
+  pool_size: 10 # The amount of database connections in the pool
