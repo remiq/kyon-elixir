@@ -14,8 +14,8 @@ web:
   command: "mix do deps.get, compile, phoenix.server"
   working_dir: "/web"
   env_file: .env
-  ports:
-    - "4000:4000"
+  expose:
+    - "8001"
   volumes:
     - "./web:/web"
     - "./data/files:/files"

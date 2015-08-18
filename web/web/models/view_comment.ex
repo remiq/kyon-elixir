@@ -15,6 +15,7 @@ defmodule Placebooru.ViewComment do
 
   def find_new(page) do
     Placebooru.ViewComment
+    |> order_new
     |> with_user
     |> with_pagination(page)
     |> Placebooru.Repo.all
