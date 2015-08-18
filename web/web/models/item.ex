@@ -10,7 +10,7 @@ defmodule Placebooru.Item do
     field :module, :string
     field :md5, :string
     field :source, :string
-    # created
+    field :created, Ecto.DateTime
 
     belongs_to :user, Placebooru.User
     has_many :tags, Placebooru.Tag

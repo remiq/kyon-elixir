@@ -117,8 +117,10 @@ defmodule Placebooru.ItemController do
       module: "img",
       md5: md5,
       source: source,
-      user_id: user_id
+      user_id: user_id,
+      created: Ecto.DateTime.local()
     }
+    # TODO: created is empty, not NOW()
     item
   end
 
