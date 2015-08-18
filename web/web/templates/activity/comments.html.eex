@@ -4,7 +4,7 @@
     <div class="item-comment">
       <div class="item">
         <a href="<%= item_path(@conn, :view, comment.ref_id, "_") %>">
-          <img src="/items/thumb_<%= comment.ref_id %>.jpg">
+          <img src="/thumb/kyon.pl_<%= comment.ref_id %>.jpg">
         </a>
       </div>
       <%= Placebooru.SharedView |> render "comment.html", comment: comment %>

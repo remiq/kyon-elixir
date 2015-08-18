@@ -3,7 +3,7 @@
   <div class="tag-item">
     <div class="item">
       <a href="<%= item_path(@conn, :view, tag_item.item_id, "_") %>">
-        <img src="/items/thumb_<%= tag_item.item_id %>.jpg">
+        <img src="/thumb/kyon.pl_<%= tag_item.item_id %>.jpg">
       </a>
     </div>
     <div class="tag">

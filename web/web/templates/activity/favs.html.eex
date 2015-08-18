@@ -2,7 +2,7 @@
   <%= for item <- @items do %>
   <div class="item">
     <a href="<%= item_path(@conn, :view, item.id, "_")  %>">
-      <img src="/items/thumb_<%= item.id %>.jpg" />
+      <img src="/thumb/kyon.pl_<%= item.id %>.jpg" />
     </a>
   </div>
   <% end %>
