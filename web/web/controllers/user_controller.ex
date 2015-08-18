@@ -8,6 +8,7 @@ defmodule Placebooru.UserController do
     |> Placebooru.User.validate
     |> LoginInteractor.find_or_create
     |> LoginInteractor.authenticate(post["passwd"])
+    |> track_login
     |> LoginInteractor.remember(conn)
     |> redirect(to: "/")
   end
@@ -16,6 +17,12 @@ defmodule Placebooru.UserController do
     conn
     |> delete_session(:current_user)
     |> redirect(to: "/")
+  end
+
+  defp track_login(post) do
+    %{name: name} = post
+    SlackWebhook.send "User #{name} logged in!"
+    post
   end
 
   defp sanitize(post) do

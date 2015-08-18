@@ -49,3 +49,5 @@ config :placebooru, :branding, %{
   """
 }
 
+config :slack_webhook, :url, System.get_env("SLACK_WEBHOOK")
+
