@@ -13,7 +13,7 @@ imgs -- thumbs
     "mogrify",
     "-resize", "200x200^",
     "-write", "/files/thumb/#{file}",
-    "/files/img/#{file}"
+    "/files/img/#{file}[0]"
   ]
 end)
 
