@@ -13,7 +13,7 @@
   </p>
   <% end %>
 
-  <%= if @item.user %>
+  <%= if @item.user do %>
   <p>
     Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
   </p>
