@@ -20,6 +20,11 @@ defmodule Placebooru.ViewComment do
     |> Placebooru.Repo.all
   end
 
+  defp order_new(query) do
+    from q in query,
+      order_by: [desc: q.created]
+  end
+
   defp with_user(query) do
     from q in query,
       preload: [:user]
