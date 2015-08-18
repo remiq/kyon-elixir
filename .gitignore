@@ -1,5 +1,8 @@
 .env
+.env.prod
+web/config/prod.exs
 web/priv/static/items/
 web/mix.lock
 data/
+
 
