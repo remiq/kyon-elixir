@@ -26,6 +26,8 @@ Change passwords, salts, etc. Save them somewhere.
 
     $ vim .env
 
+Copy `web/config/dev.exs` to `web/config/prod.exs` and change default settings.
+
 Start docker containers
 
     $ docker-compose up -d

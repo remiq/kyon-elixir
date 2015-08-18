@@ -34,3 +34,18 @@ config :placebooru, Placebooru.Repo,
   password: System.get_env("POSTGRES_PASSWORD"),
   database: System.get_env("POSTGRES_USER"),
   pool_size: 10 # The amount of database connections in the pool
+
+config :placebooru, :branding, %{
+  title: "DEV kyon.pl",
+  file_prefix: "kyon.pl_",
+  main_page: """
+  Kyon.pl is back. Why? I'm not sure.
+
+  Oh, I have open-sourced it. You can check it [here](https://github.com/remiq/kyon-elixir).
+
+  --
+
+  remiq, 15 may 2015
+  """
+}
+

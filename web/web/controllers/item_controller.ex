@@ -122,8 +122,15 @@ defmodule Placebooru.ItemController do
   defp save_original(item, tmp_path) do
     item_id = Integer.to_string item.id
     File.copy!(tmp_path, 
-      @static_path <> "kyon.pl_" <> item_id <> ".jpg",
+      @static_path <> prefix <> item_id <> ".jpg",
       :infinity)
     item
   end
+
+  defp prefix do
+    %{file_prefix: file_prefix} = Application.get_env(:placebooru, :branding, 
+      %{file_prefix: "placebooru_"})
+    file_prefix
+  end
+
 end

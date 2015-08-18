@@ -38,6 +38,7 @@ defmodule Placebooru.Mixfile do
      {:comeonin, "~> 1.1.2"},
      {:httpoison, "~> 0.7.2"},
      {:html_sanitize_ex, "~> 0.2.1"},
+     {:earmark, "~> 0.1.17"},
      {:cowboy, "~> 1.0.2"}]
   end
 end
