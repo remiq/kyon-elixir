@@ -19,10 +19,11 @@ defmodule Placebooru.LoginInteractor do
 
   def register(%{name: name, passwd: passwd}) do
     hash = @derivation.hashpwsalt passwd
-    Repo.insert %User{
+    {:ok, user} = Repo.insert %User{
       name: name,
       passwd: hash
     }
+    user
   end
 
   def authenticate({:error, message}, _) do
@@ -42,8 +43,10 @@ defmodule Placebooru.LoginInteractor do
   end
 
   def remember(user, conn) do
-    conn |> put_session(:current_user, 
-      id: user.id, name: user.name)
+    conn |> put_session(:current_user, %{
+      id: user.id,
+      name: user.name
+    })
   end
 
   def remind(conn) do

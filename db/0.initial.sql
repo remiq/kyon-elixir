@@ -32,7 +32,8 @@ CREATE TABLE tags (
 CREATE TABLE tag_items (
   id SERIAL,
   item_id INT,
-  tag_id INT
+  tag_id INT,
+  user_id INT DEFAULT 0
 );
 
 CREATE TABLE tag_comments (
@@ -53,7 +54,7 @@ CREATE TABLE users (
   id SERIAL,
   name VARCHAR(20),
   passwd VARCHAR(200),
-  status INT
+  status INT DEFAULT 0
 );
 
 CREATE VIEW view_comments AS

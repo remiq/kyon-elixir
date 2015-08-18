@@ -38,6 +38,24 @@ defmodule Placebooru.Tag do
       preload: [:tag]
   end
 
+  def insert_by_name(name, item_id, _user_id) do
+    # TODO: name should be case-insensitive
+    tag = Repo.get_by(__MODULE__, name: name)
+    if (tag == nil) do
+      {:ok, tag} = Repo.insert %__MODULE__{
+        name: name
+      }
+    end
+    IO.inspect(tag)
+    # TODO: check for synonyms
+    tag_id = tag.id
+    Repo.insert %TagItem{
+      item_id: item_id,
+      tag_id: tag_id
+      # TODO: tag marking should be auditable by user_id
+    }
+  end
+
   
 
   """

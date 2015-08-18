@@ -4,6 +4,7 @@ defmodule Placebooru.UserController do
 
   def login(conn, post) do
     post
+    |> sanitize
     |> Placebooru.User.validate
     |> LoginInteractor.find_or_create
     |> LoginInteractor.authenticate(post["passwd"])
@@ -17,4 +18,11 @@ defmodule Placebooru.UserController do
     |> redirect(to: "/")
   end
 
+  defp sanitize(post) do
+    # %{"name", "passwd"}
+    post
+    |> Enum.reduce(%{}, fn {k, v}, acc ->
+      Map.put(acc, k, HtmlSanitizeEx.strip_tags(v))
+    end)
+  end
 end

@@ -17,8 +17,9 @@ defmodule Placebooru.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Placebooru, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :httpoison]]
+     applications: [:phoenix, :phoenix_html, :logger,
+                    :phoenix_ecto, :postgrex, :httpoison,
+                    :cowboy]]
   end
 
   # Specifies which paths to compile per environment
@@ -34,9 +35,9 @@ defmodule Placebooru.Mixfile do
      {:postgrex, "~> 0.9.1"},
      {:phoenix_html, "~> 2.1.1"},
      {:phoenix_live_reload, "~> 0.6.0", only: :dev},
-     {:mogrify, "~> 0.1"},
      {:comeonin, "~> 1.1.2"},
      {:httpoison, "~> 0.7.2"},
+     {:html_sanitize_ex, "~> 0.2.1"},
      {:cowboy, "~> 1.0.2"}]
   end
 end

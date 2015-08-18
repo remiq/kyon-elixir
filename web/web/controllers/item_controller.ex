@@ -4,7 +4,7 @@ defmodule Placebooru.ItemController do
   alias Placebooru.Tag
   alias Placebooru.LoginInteractor
 
-  @static_path "priv/static/items/"
+  @static_path "/files/img/"
 
   def index(conn, _params) do
     render conn, "index.html"
@@ -20,45 +20,27 @@ defmodule Placebooru.ItemController do
       comments: Placebooru.ItemComment.find_by_item_id(id)
   end
 
-  def tag(conn, _) do
-    """
-    TODO: Tagging temporarily disabled.
-    """
-    redirect(conn, to: "/")
-  end
-
-
-  def tag(conn, %{"id" => id, "tag" => tag_string}) do
+  def tag(conn, %{"id" => id, "tag" => unsafe_tags}) do
     """
     Adds a tag and redirects to view/:id
     """
     item_id = String.to_integer(id)
-    [id: _user_id, name: _] = LoginInteractor.remind(conn)
-    # TODO: sanitize tag name - alphanumeric + _
-    tag = Repo.get_by Tag, name: tag_string
-    if tag == nil do
-      tag = Repo.insert %Tag{
-        name: tag_string
-      }
-    end
-    tag_id = tag.id
-    Repo.insert %Placebooru.TagItem{
-      item_id: item_id,
-      tag_id: tag_id
-      # TODO: tag marking should be auditable
-    }
+    %{id: user_id} = LoginInteractor.remind(conn)
+    unsafe_tags
+    |> HtmlSanitizeEx.strip_tags
+    |> String.split(" ", trim: true)
+    |> Enum.each(fn tag_name -> Tag.insert_by_name(tag_name, item_id, user_id) end)
     redirect(conn, to: "/item/" <> id <> "/_")
   end
 
-  def comment(conn, %{"id" => id, "comment" => comment}) do
+  def comment(conn, %{"id" => id, "comment" => unsafe_comment}) do
     """
     Adds a comment and redirects to view/:id
     """
     item_id = String.to_integer(id)
-    [id: user_id, name: _] = LoginInteractor.remind(conn)
+    %{id: user_id} = LoginInteractor.remind(conn)
     Repo.insert %Placebooru.ItemComment{
-      # TODO: sanitize it
-      content: comment,
+      content: HtmlSanitizeEx.strip_tags(unsafe_comment),
       user_id: user_id,
       item_id: item_id,
       created: Ecto.DateTime.local()
@@ -73,14 +55,7 @@ defmodule Placebooru.ItemController do
     render conn, "preupload.html"
   end
 
-  def upload(conn, _) do
-    """
-    TODO: Upload temporarily disabled.
-    """
-    redirect(conn, to: "/")
-  end
-
-  def upload(conn, %{"item" => item, "source" => source}) do
+  def upload(conn, %{"item" => item, "source" => unsafe_source}) do
     """
     Saves uploaded Item.
     """
@@ -90,26 +65,26 @@ defmodule Placebooru.ItemController do
       path: tmp_path              # "/tmp/plug-1431/multipart-989804-534874-2"
     } = item
     
-    handle_file_upload(conn, tmp_path, source)
+    handle_file_upload(conn, tmp_path, HtmlSanitizeEx.strip_tags(unsafe_source))
   end
 
-  def upload(conn, %{"url" => url}) do
+  def upload(conn, %{"url" => unsafe_url}) do
     """
     Fetches Item from web.
     """
     HTTPoison.start
-    %HTTPoison.Response{body: file_contents} = HTTPoison.get! url
+    %HTTPoison.Response{body: unsafe_file_contents} = HTTPoison.get!(unsafe_url)
     
     # write to file, since we already have this route
     tmp_path = "/tmp/kyon-upload-" # TODO: add random ending
-    File.write! tmp_path, file_contents
+    File.write!(tmp_path, unsafe_file_contents)
 
-    handle_file_upload(conn, tmp_path, url)
+    handle_file_upload(conn, tmp_path, HtmlSanitizeEx.strip_tags(unsafe_url))
   end
 
   defp handle_file_upload(conn, tmp_path, source) do
+    %{id: user_id} = LoginInteractor.remind(conn)
     md5 = get_md5(tmp_path)
-
     existing_items = Item.find_by_md5(md5)
     case Enum.count(existing_items) do
       count when count > 0 -> 
@@ -117,9 +92,8 @@ defmodule Placebooru.ItemController do
         |> hd
         |> redirect_to_item(conn)
       _ -> 
-        insert(md5, source)
+        insert(md5, source, user_id)
         |> save_original(tmp_path)
-        |> save_thumb(tmp_path)
         |> redirect_to_item(conn)
     end
   end
@@ -135,13 +109,14 @@ defmodule Placebooru.ItemController do
     redirect(conn, to: "/item/" <> item_id <> "/_")
   end
 
-  defp insert(md5, source) do
-    Repo.insert %Item{
+  defp insert(md5, source, user_id) do
+    {:ok, item} = Repo.insert %Item{
       module: "img",
       md5: md5,
-      source: source, # TODO: sanitize source
-      user_id: 1      # TODO: correct user handling
+      source: source,
+      user_id: user_id
     }
+    item
   end
 
   defp save_original(item, tmp_path) do
@@ -151,13 +126,4 @@ defmodule Placebooru.ItemController do
       :infinity)
     item
   end
-
-  defp save_thumb(item, tmp_path) do
-    item_id = Integer.to_string item.id
-    Mogrify.open(tmp_path)
-    |> Mogrify.resize("200x200^")
-    |> Mogrify.save(@static_path <> "thumb_" <> item_id <> ".jpg")
-    item
-  end
-
 end

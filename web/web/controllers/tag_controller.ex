@@ -38,7 +38,7 @@ defmodule Placebooru.TagController do
     Adds a comment and redirects to single/:id
     """
     tag_id = String.to_integer(id)
-    [id: user_id, name: _] = Placebooru.LoginInteractor.remind(conn)
+    %{id: user_id} = Placebooru.LoginInteractor.remind(conn)
     Repo.insert %Placebooru.TagComment{
       # TODO: sanitize it
       content: comment,
