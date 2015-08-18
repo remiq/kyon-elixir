@@ -33,3 +33,12 @@ db:
     - "./data/db:/var/lib/postgresql/data"
 
 
+# utility containers
+
+imagemagick:
+  image: "jujhars13/docker-imagemagick"
+  command: "true"
+  working_dir: "/files"
+  volumes:
+    - "./data/files:/files"
+
