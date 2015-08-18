@@ -13,9 +13,11 @@
   </p>
   <% end %>
 
+  <%= if @item.user %>
   <p>
     Submitted by <a href="#<%= @item.user.id %>"><%= @item.user.name %></a>
   </p>
+  <%= end %>
 
   <%= Placebooru.SharedView |> render "comments.html", conn: @conn, comments: @comments, url_add: item_path(@conn, :comment, @item.id) %>
 </div>
