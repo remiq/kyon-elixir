@@ -21,7 +21,7 @@ defmodule Placebooru.UserController do
 
   defp track_login(post) do
     %{name: name} = post
-    SlackWebhook.send "User #{name} logged in!"
+    SlackWebhook.async_send "User #{name} logged in!"
     post
   end
 

@@ -30,7 +30,7 @@ defmodule Placebooru.ItemController do
     |> HtmlSanitizeEx.strip_tags
     |> String.split(" ", trim: true)
     |> Enum.each(fn tag_name -> Tag.insert_by_name(tag_name, item_id, user_id) end)
-    SlackWebhook.send "New tags added"
+    SlackWebhook.async_send "New tags added"
     redirect(conn, to: "/item/" <> id <> "/_")
   end
 
@@ -46,7 +46,7 @@ defmodule Placebooru.ItemController do
       item_id: item_id,
       created: Ecto.DateTime.local()
     }
-    SlackWebhook.send "New comment added"
+    SlackWebhook.async_send "New comment added"
     redirect(conn, to: "/item/" <> id <> "/_")
   end
 
@@ -133,7 +133,7 @@ defmodule Placebooru.ItemController do
   end
 
   defp track_upload(item) do
-    SlackWebhook.send "New item uploaded"
+    SlackWebhook.async_send "New item uploaded"
     item
   end
 

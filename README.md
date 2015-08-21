@@ -45,6 +45,13 @@ Change `MIX_PROD` to `prod` in `.env`
     $ vim .env
     MIX_PROD=prod
 
+### Backup
+
+Log into database
+
+    $ docker-compose run --rm db bash
+    db$ pg_dump --host=db --username=web web > 2015-08-19.pg_dump.sql
+
 ## Delayed
 
 Plugin / api (it probably does not work anymore)

@@ -39,7 +39,7 @@ defmodule Placebooru.Mixfile do
      {:httpoison, "~> 0.7.2"},
      {:html_sanitize_ex, "~> 0.2.1"},
      {:earmark, "~> 0.1.17"},
-     {:slack_webhook, "~> 0.0.1"},
+     {:slack_webhook, "~> 0.0.2"},
      {:cowboy, "~> 1.0.2"}]
   end
 end
