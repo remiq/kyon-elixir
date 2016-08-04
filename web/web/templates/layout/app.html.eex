@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <%= @inner %>
+      <%= render @view_module, @view_template, assigns %>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

@@ -10,6 +10,7 @@ config :placebooru, Placebooru.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "89weHOx4gncibpEaRyB4TSJPAECN1zwExpVDRJK87eFO9inqENdnvXLCjoLdQFeQ",
+  session_signing_salt: "abcabc",
   debug_errors: false,
   pubsub: [name: Placebooru.PubSub,
            adapter: Phoenix.PubSub.PG2]

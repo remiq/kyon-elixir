@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :placebooru, Placebooru.Endpoint,
-  http: [port: System.get_env("PORT")],
+  http: [port: 8001],
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
@@ -29,10 +29,10 @@ config :logger, :console, format: "[$level] $message\n"
 # Configure your database
 config :placebooru, Placebooru.Repo,
   adapter: Ecto.Adapters.Postgres,
-  hostname: System.get_env("POSTGRES_HOST"),
-  username: System.get_env("POSTGRES_USER"),
-  password: System.get_env("POSTGRES_PASSWORD"),
-  database: System.get_env("POSTGRES_USER"),
+  hostname: "localhost",
+  username: "dev",
+  password: "dev",
+  database: "kyon_dev",
   pool_size: 10 # The amount of database connections in the pool
 
 config :placebooru, :branding, %{
@@ -50,4 +50,3 @@ config :placebooru, :branding, %{
 }
 
 config :slack_webhook, :url, System.get_env("SLACK_WEBHOOK")
-

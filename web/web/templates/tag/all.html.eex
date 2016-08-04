@@ -5,9 +5,8 @@
 
   <%= render "list.html", conn: @conn, items: @items %>
 
-  <%=
-    Placebooru.SharedView
-    |> render "pager.html", page: @page, url: &(tag_path(@conn, :all, &1))
+  <%= render Placebooru.SharedView, "pager.html",
+    page: @page, url: &(tag_path(@conn, :all, &1))
   %>
 
 </div>

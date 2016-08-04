@@ -1,6 +1,5 @@
 defmodule Placebooru.ViewComment do
   use Placebooru.Web, :model
-  use Ecto.Model
 
   @page_size 20
   @primary_key {:id, :string, []}

@@ -11,8 +11,7 @@ defmodule Placebooru do
       supervisor(Placebooru.Endpoint, []),
       # Start the Ecto repository
       worker(Placebooru.Repo, []),
-      # Here you could define other workers and supervisors as children
-      # worker(Placebooru.Worker, [arg1, arg2, arg3]),
+      worker(Placebooru.Thumbnailer, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

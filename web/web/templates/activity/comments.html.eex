@@ -7,7 +7,7 @@
           <img src="/thumb/<%= prefix %><%= comment.ref_id %>.jpg">
         </a>
       </div>
-      <%= Placebooru.SharedView |> render "comment.html", comment: comment %>
+      <%= render Placebooru.SharedView, "comment.html", comment: comment %>
     </div>
     <% end %>
     <%= if (comment.type == "tag") do %>
@@ -17,7 +17,7 @@
           // comment.tag.name
         </a>
       </div>
-      <%= Placebooru.SharedView |> render "comment.html", comment: comment, conn: @conn %>
+      <%= render Placebooru.SharedView, "comment.html", comment: comment, conn: @conn %>
     </div>
     <% end %>
   <% end %>

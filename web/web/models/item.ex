@@ -1,10 +1,8 @@
 defmodule Placebooru.Item do
   use Placebooru.Web, :model
-  use Ecto.Model
-  alias Placebooru.Repo
 
   @page_size 20
-  
+
 
   schema "items" do
     field :module, :string
@@ -34,7 +32,7 @@ defmodule Placebooru.Item do
   def find_by_id(id) do
     Placebooru.Item
     |> with_user
-    |> Repo.get id
+    |> Repo.get(id)
   end
 
   def find_by_md5(md5) do

@@ -1,0 +1,45 @@
+---
+- name: Install Kyon
+  hosts: kyon
+  tasks:
+    - file: path=/kyon/db state=directory
+    - copy: src=../backup/db/latest.sql dest=/kyon/db/latest.sql
+    - file: path=/kyon/app state=directory
+    - unarchive: src=../backup/app/latest.tar.gz dest=/kyon/app/
+    - acl: name=/kyon/app/bin/placebooru permissions=x etype=user entity=root state=present
+    - file: path=/kyon/data state=directory
+- name: Install db
+  hosts: kyon
+  become: yes
+  become_user: postgres
+  tasks:
+    #- shell: "psql kyon < latest.sql"
+    #  args:
+    #    chdir: /kyon/db
+    # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO kyon;
+    - postgresql_privs: >
+        db=kyon
+        privs=ALL
+        objs=ALL_IN_SCHEMA
+        role=kyon
+    # GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO kyon;
+- name: Install nginx
+  hosts: kyon
+  tasks:
+    - apt: update_cache=yes
+    - apt: name=imagemagick
+    - apt: name=nginx
+    - apt: name={{item}}
+      with_items:
+        - nginx
+        - imagemagick
+        - ufw
+    - template: src=nginx/default.conf dest=/etc/nginx/conf.d/default.conf
+    - service: name=nginx state=restarted enabled=yes
+    - ufw: state=enabled policy=deny
+    - ufw: rule=allow port=22 proto=tcp
+    - ufw: rule=allow port=80 proto=tcp
+- name: Start placebooru
+  hosts: kyon
+  tasks:
+    - command: /kyon/app/bin/placebooru start

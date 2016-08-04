@@ -3,7 +3,7 @@
 
   </div>
 
-  <%= Placebooru.SharedView |> render "tags.html", conn: @conn, tags: @tags, url_add: item_path(@conn, :tag, @item.id) %>
+  <%= render Placebooru.SharedView, "tags.html", conn: @conn, tags: @tags, url_add: item_path(@conn, :tag, @item.id) %>
 
   <img src="/img/kyon.pl_<%= @item.id %>.jpg" alt="" />
 
@@ -19,5 +19,5 @@
   </p>
   <%= end %>
 
-  <%= Placebooru.SharedView |> render "comments.html", conn: @conn, comments: @comments, url_add: item_path(@conn, :comment, @item.id) %>
+  <%= render Placebooru.SharedView, "comments.html", conn: @conn, comments: @comments, url_add: item_path(@conn, :comment, @item.id) %>
 </div>

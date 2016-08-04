@@ -18,7 +18,9 @@ defmodule Placebooru.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
+      import Ecto.Query, only: [from: 2]
+      alias Placebooru.Repo
     end
   end
 
@@ -28,7 +30,7 @@ defmodule Placebooru.Web do
 
       # Alias the data repository and import query/model functions
       alias Placebooru.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router

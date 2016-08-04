@@ -1,6 +1,5 @@
 defmodule Placebooru.TagItem do
   use Placebooru.Web, :model
-  use Ecto.Model
 
   @page_size 40
 
@@ -20,9 +19,9 @@ defmodule Placebooru.TagItem do
 
   def with_pagination(query, page) do
     offset = (String.to_integer(page) - 1) * @page_size
-    from q in query,
-    limit: @page_size,
-    offset: ^offset
+    from(q in query,
+      limit: @page_size,
+      offset: ^offset)
   end
 
   def with_tag(query) do

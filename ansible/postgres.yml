@@ -1,0 +1,29 @@
+---
+- name: Install database
+  hosts: kyon
+  tasks:
+    - name: ensure apt cache updated
+      apt: update_cache=yes
+    - name: ensure postgres installed
+      apt: name={{item}}
+      with_items:
+        - postgresql
+        - libpq-dev
+        - python-psycopg2
+- name: Configure database and user for kyon
+  hosts: kyon
+  become: yes
+  become_user: postgres
+  tasks:
+    - name: ensure db created
+      postgresql_db: name=kyon
+    - name: ensure user with access
+      postgresql_user: db=kyon name=kyon password={{db_pass}} priv=ALL
+    - name: ensure no unnecessary privs
+      postgresql_user: name=kyon role_attr_flags=NOSUPERUSER,NOCREATEDB
+#- name: Notify on slack
+#  local_action:
+#    module: slack
+#    token: "{{slack_token}}"
+#    msg: "Postgres deployed @ kyon"
+# TODO: what about db import and backups?

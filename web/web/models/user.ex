@@ -1,6 +1,5 @@
 defmodule Placebooru.User do
   use Placebooru.Web, :model
-  use Ecto.Model
 
   schema "users" do
     field :name, :string

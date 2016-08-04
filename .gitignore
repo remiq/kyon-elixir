@@ -1,8 +1,9 @@
 .env
 .env.prod
 web/config/prod.exs
+web/config/prod.secret.exs
 web/priv/static/items/
+web/rel/
 web/mix.lock
 data/
-
-
+backup/

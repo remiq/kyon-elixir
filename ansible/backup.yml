@@ -1,0 +1,14 @@
+---
+- name: Backup db
+  hosts: kyon
+  become: yes
+  become_user: postgres
+  tasks:
+    - shell: pg_dump kyon > latest.sql
+      args:
+        chdir: /kyon/backup-db
+- name: Backup db and files
+  hosts: kyon
+  tasks:
+    - fetch: src=/kyon/backup-db/latest.sql dest=../backup/db/latest.sql flat=yes
+    - synchronize: src=/kyon/data/ dest=../backup/data mode=pull

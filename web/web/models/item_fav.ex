@@ -1,6 +1,5 @@
 defmodule Placebooru.ItemFav do
   use Placebooru.Web, :model
-  use Ecto.Model
 
   @fav_threshold 1
 
@@ -14,7 +13,7 @@ defmodule Placebooru.ItemFav do
   	  group_by: i.item_id,
   	  select: i.item_id,
   	  having: count(i.item_id) >= @fav_threshold
-    ) 
+    )
     |> Placebooru.Repo.all
   end
 

@@ -1,7 +1,5 @@
 defmodule Placebooru.Tag do
   use Placebooru.Web, :model
-  use Ecto.Model
-  alias Placebooru.Repo
   alias Placebooru.TagItem
 
   schema "tags" do
@@ -24,8 +22,8 @@ defmodule Placebooru.Tag do
   end
 
   def where_tag(query, id_tag) do
-    from q in query,
-      where: q.tag_id == ^id_tag
+    from(q in query,
+      where: q.tag_id == ^id_tag)
   end
 
   def where_item(query, id_item) do
@@ -41,12 +39,12 @@ defmodule Placebooru.Tag do
   def insert_by_name(name, item_id, _user_id) do
     # TODO: name should be case-insensitive
     tag = Repo.get_by(__MODULE__, name: name)
-    if (tag == nil) do
-      {:ok, tag} = Repo.insert %__MODULE__{
-        name: name
-      }
+    tag = case tag do
+      nil ->
+        {:ok, tag} = Repo.insert %__MODULE__{name: name}
+        tag
+      tag -> tag
     end
-    IO.inspect(tag)
     # TODO: check for synonyms
     tag_id = tag.id
     Repo.insert %TagItem{
@@ -55,14 +53,4 @@ defmodule Placebooru.Tag do
       # TODO: tag marking should be auditable by user_id
     }
   end
-
-  
-
-  """
-  INSERT INTO tags (id, name) VALUES
-  (1, 'aaa'),
-  (2, 'bbb'),
-  (3, 'ccc');
-  """
-
 end

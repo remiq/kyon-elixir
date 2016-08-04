@@ -1,7 +1,5 @@
 defmodule Placebooru.TagComment do
   use Placebooru.Web, :model
-  use Ecto.Model
-  alias Placebooru.Repo
 
   schema "tag_comments" do
     field :content, :string

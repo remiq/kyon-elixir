@@ -26,10 +26,12 @@ defmodule Placebooru.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
 
+  conf = Application.get_env(:placebooru, Placebooru.Endpoint)
+
   plug Plug.Session,
     store: :cookie,
     key: "_placebooru_key",
-    signing_salt: System.get_env("SESSION_SIGN_SALT")
+    signing_salt: Dict.get(conf, :session_signing_salt, "")
 
   plug Placebooru.Router
 end

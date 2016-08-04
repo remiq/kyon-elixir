@@ -1,6 +1,5 @@
 defmodule Placebooru.ItemComment do
 	use Placebooru.Web, :model
-	use Ecto.Model
 
 	schema "item_comments" do
 		field :content, :string
